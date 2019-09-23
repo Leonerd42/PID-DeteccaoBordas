@@ -202,12 +202,12 @@ def PlotarLinha(img, x1, y1, x2, y2, angulo, tx, ty, cor, line):
 #                     COMEÇO DO PROGRAMA PRINCIPAL
 # -------------------------------------------------------------------
 
-nome = 'cubo.jpg'
+nome = 'im.png'
 
 ## Variaveis Globais
 ## ------- Manipulação do desenho
 anguloRotacao = 90
-TranslacaoX = 115
+TranslacaoX = 120 
 TranslacaoY = 0
 
 ## Thesholds 
@@ -221,7 +221,6 @@ retasImg = cv2.imread(nome)
 finalImage = cv2.imread(nome) 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 edges = cv2.Canny(gray,100,200)
-output = edges
 
 retas = []
 transformada, picos = HoughLines(edges, votacaoHough, 500)
@@ -245,7 +244,7 @@ for segs in segmentos:
     for seg in segs:                                        # tetha, Tx, Ty,    RGB,    thick
         PlotarLinha(finalImage, seg.x1, seg.y1, seg.x2, seg.y2, anguloRotacao, TranslacaoX, TranslacaoY, (255, 0, 0), 1)
 
-# Mostrando a imagem 
+# Mostrando as imagens
 plt.subplot(231),plt.imshow(img,cmap = 'gray')
 plt.title('Imagem Original'), plt.xticks([]), plt.yticks([])
 
