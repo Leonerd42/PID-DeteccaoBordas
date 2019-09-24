@@ -208,23 +208,23 @@ def PlotarLinha(img, x1, y1, x2, y2, angulo, tx, ty, cor, line):
 
 nome = 'cubo.jpg'
 
-## Variaveis Globais
-## ------- Manipulação do desenho
-anguloRotacao = 0
-TranslacaoX = 0 
-TranslacaoY = 0
-
-## Thesholds 
-votacaoHough = 30
-lenghtMinSeg = 8
-lengthGap = 5
-
 ## Carregando imagens
 img = cv2.imread(nome) 
 retasImg = cv2.imread(nome) 
 finalImage = cv2.imread(nome) 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 edges = cv2.Canny(gray,100,200)
+
+## Variaveis Globais
+## ------- Manipulação do desenho
+anguloRotacao = 90
+TranslacaoX = len(img)
+TranslacaoY = 0
+
+## Thesholds 
+votacaoHough = 20
+lenghtMinSeg = 10
+lengthGap = 5
 
 retas = []
 transformada, picos = HoughLines(edges, votacaoHough, 500)
