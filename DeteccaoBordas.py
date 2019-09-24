@@ -99,6 +99,8 @@ def BuscarReta (img, reta):
             x = int(round(rho - y*seno)/cosseno)
             if x >= len(img): 
                 x = len(img)-1
+            elif x < 0:
+                x = 0
             dot = Dot()
             dot.x = x 
             dot.y = y
@@ -108,6 +110,8 @@ def BuscarReta (img, reta):
             y = int(round(rho - x*cosseno)/seno)
             if y >= len(img[0]):
                 y = len(img[0])-1
+            elif y < 0: 
+                y = 0
             dot = Dot()
             dot.x = x
             dot.y = y
@@ -202,16 +206,16 @@ def PlotarLinha(img, x1, y1, x2, y2, angulo, tx, ty, cor, line):
 #                     COMEÇO DO PROGRAMA PRINCIPAL
 # -------------------------------------------------------------------
 
-nome = 'im.png'
+nome = 'cubo.jpg'
 
 ## Variaveis Globais
 ## ------- Manipulação do desenho
-anguloRotacao = 90
-TranslacaoX = 120 
+anguloRotacao = 0
+TranslacaoX = 0 
 TranslacaoY = 0
 
 ## Thesholds 
-votacaoHough = 20
+votacaoHough = 30
 lenghtMinSeg = 8
 lengthGap = 5
 
