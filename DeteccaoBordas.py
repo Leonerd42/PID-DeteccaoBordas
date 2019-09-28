@@ -206,7 +206,7 @@ def PlotarLinha(img, x1, y1, x2, y2, angulo, tx, ty, cor, line):
 #                     COMEÇO DO PROGRAMA PRINCIPAL
 # -------------------------------------------------------------------
 
-nome = 'cubo.jpg'
+nome = input('Insira o nome da imagem: ')
 
 ## Carregando imagens
 img = cv2.imread(nome) 
@@ -222,9 +222,9 @@ TranslacaoX = len(img)
 TranslacaoY = 0
 
 ## Thesholds 
-votacaoHough = 20
-lenghtMinSeg = 10
-lengthGap = 5
+votacaoHough = int(input('Insira o minimo de votação na transformada de Hough: '))
+lenghtMinSeg = int(input('Digite o tamanho minimo do segmento: '))
+lengthGap = int(input('Digite o tamanho do espaço maximo entre segmento: '))
 
 retas = []
 transformada, picos = HoughLines(edges, votacaoHough, 500)
@@ -241,12 +241,17 @@ segmentos = []
 for dots in retas:  
     reta = [dots[0], dots[-1]]
     PlotarLinha(retasImg, reta[0].x, reta[0].y, reta[1].x, reta[1].y, anguloRotacao, TranslacaoX, TranslacaoY, (0,255,0), 1)
-    segmentos.append(BuscarSegmento(edges, dots, lenghtMinSeg, lengthGap))
+    auxiliar = BuscarSegmento(edges, dots, lenghtMinSeg, lengthGap)
+    segmentos.append(auxiliar)
 
 # Desenhando na imagem 
+contador = 0
 for segs in segmentos: 
     for seg in segs:                                        # tetha, Tx, Ty,    RGB,    thick
         PlotarLinha(finalImage, seg.x1, seg.y1, seg.x2, seg.y2, anguloRotacao, TranslacaoX, TranslacaoY, (255, 0, 0), 1)
+        # Printar no console 
+        contador += 1
+        print('Segmento: ', contador, 'x0:',seg.x1, 'y0:', seg.y1, 'xf:',seg.x2,'yf:',seg.y2)
 
 # Mostrando as imagens
 plt.subplot(231),plt.imshow(img,cmap = 'gray')
